@@ -12,8 +12,7 @@ class PessoaController extends Controller
      */
     public function index()
     {
-       $pessoas = Pessoa::all();
-       return view('pessoas.index', compact('pessoas')); 
+       return view('home'); 
     }
 
     /**
@@ -29,7 +28,18 @@ class PessoaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validação simples
+        $request->validate([
+            'nome' => 'required|string|max:250',
+            'email' => 'required|email|unique:pessoas,email',
+            'telefone' => 'nullable',
+        ]);
+
+        // Salva no banco
+        \App\Models\Pessoa::create($request->all());
+
+        // Redireciona para o formulário ou para a lista (você escolhe)
+        return redirect()->route('pessoas.create')->with('sucess', 'Pessoa cadastrada com sucesso!');
     }
 
     /**
