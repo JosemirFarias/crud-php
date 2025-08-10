@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PessoaController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PessoaController::class, 'index'])->name('pessas.index');
