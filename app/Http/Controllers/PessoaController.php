@@ -37,10 +37,10 @@ class PessoaController extends Controller
         ]);
 
         // Salva no banco
-        \App\Models\Pessoa::create($request->all());
+        Pessoa::create($request->all());
 
         // Redireciona para o formulário ou para a lista (você escolhe)
-        return redirect()->route('pessoas.create')->with('sucess', 'Pessoa cadastrada com sucesso!');
+        return redirect()->route('pessoas.index')->with('success', 'Pessoa cadastrada com sucesso!');
     }
 
     /**
@@ -56,7 +56,8 @@ class PessoaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        return view('pessoas.edit', compact('pessoa'));
     }
 
     /**
@@ -64,7 +65,17 @@ class PessoaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+          $request->validate([
+            'nome' => 'required',
+            'email' => 'required|email',
+            'telefone' => 'nullable',
+        ]);
+
+        $pessoa = Pessoa::findOrFail($id);
+        $pessoa->update($request->all());
+
+        return redirect()->route('pessoas.index')
+            ->with('success', 'Cadastro Atualizado!');
     }
 
     /**

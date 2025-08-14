@@ -25,6 +25,11 @@
         <br><br>
 
         <button type="submit">Salvar</button>
+
+        <a href="{{ route('pessoas.index') }}">
+        <button type="button">Lista de Cadastrados</button>
+        </a>
+
     </form>
 </body>
 

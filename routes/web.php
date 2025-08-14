@@ -5,5 +5,7 @@ use App\Http\Controllers\PessoaController;
 
 Route::get('/', [PessoaController::class, 'index'])->name('pessoas.index');
 Route::get('/pessoas/criar', [PessoaController::class, 'create'])->name('pessoas.create');
-Route::post('pessoas', [PessoaController::class, 'store'])->name('pessoas.store');
-
+Route::post('/pessoas', [PessoaController::class, 'store'])->name('pessoas.store');
+Route::get('/pessoas/{id}/edit', [PessoaController::class, 'edit'])->name('pessoas.edit');
+Route::put('pessoas/{id}', [PessoaController::class, 'update']) ->name('pessoas.update');
+Route::delete('pessoas/{id}', [PessoaController::class, 'destoy']) ->name('pessoas.destroy');

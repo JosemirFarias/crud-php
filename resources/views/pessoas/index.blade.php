@@ -11,6 +11,12 @@
 <body>
     <h1>Pessoas Cadastradas</h1>
 
+    @if(session('success'))
+        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px;">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <a href="{{ route('pessoas.create') }}">
     <button>Adicionar Nova Pessoa</button>
     </a>
@@ -34,11 +40,11 @@
                     <td>{{ $pessoa->email }}</td>
                     <td>{{ $pessoa->telefone }}</td>
                     <td>
-                        <a href="#">
+                        <a href="{{ route('pessoas.edit', $pessoa->id) }}">
                         <button>Editar</button>
                         </a>
 
-                        <a href="#">
+                        <a href="{{ route('pessoas.destroy', $pessoa->id) }}">
                         <button>Excluir</button>
                         </a>
 
