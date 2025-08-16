@@ -11,12 +11,6 @@
 
     <h1>Editar Cadastro</h1>
 
-    @if(session('success'))
-        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px;">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <form action="{{ route('pessoas.update', $pessoa->id) }}" method="POST">
         @csrf
         @method('PUT')

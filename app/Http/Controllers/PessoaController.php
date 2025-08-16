@@ -48,7 +48,8 @@ class PessoaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        return view('pessoas.show', compact('pessoa'));
     }
 
     /**
@@ -83,6 +84,10 @@ class PessoaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        $pessoa->delete();
+
+        return redirect()->route('pessoas.index')
+            ->with('success', 'Cadastro Excluído!');
     }
 }
