@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 
     <meta charset="UTF-8">
@@ -13,7 +14,8 @@
 
     <title>Lista de Cadastros</title>
 
-    </head>
+</head>
+
 <body>
 
     <div class="container mt-3">
@@ -22,17 +24,28 @@
             <h1>Pessoas Cadastradas</h1>
         </div>
 
-        <div class="alert alert-success">
-            <strong>
-                @if(session('success'))
-                {{ session('success') }}
-                @endif
-            </strong>
-        </div>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <strong>{{ session('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <script>
+                // Fecha automaticamente após 3 segundos
+                setTimeout(() => {
+                    let alert = document.querySelector('.alert');
+                    if (alert) {
+                        let bsAlert = new bootstrap.Alert(alert);
+                        bsAlert.close();
+                    }
+                }, 3000);
+            </script>
+        @endif
+
 
         <div class="mb-3">
             <a href="{{ route('pessoas.create') }}">
-            <button>Adicionar Nova Pessoa</button>
+                <button type="button" class="btn btn-outline-primary">Adicionar Nova Pessoa</button>
             </a>
         </div>
 
@@ -40,7 +53,6 @@
 
             <thead>
                 <tr>
-
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Email</th>
@@ -56,19 +68,19 @@
                         <td>{{ $pessoa->telefone }}</td>
                         <td>
                             <a href="{{ route('pessoas.edit', $pessoa->id) }}" class="btn btn-warning btn-sm">
-                            <i class="bi bi-pencil"></i>
+                                <i class="bi bi-pencil"></i>
                             </a>
 
                             <a href="{{ route('pessoas.show', $pessoa->id) }}" class="btn btn-info btn-sm">
-                            <i class="bi bi-eye"></i>
+                                <i class="bi bi-eye"></i>
                             </a>
 
                         </td>
                     </tr>
-                    
                 @endforeach
             </tbody>
         </table>
     </div>
 </body>
+
 </html>
